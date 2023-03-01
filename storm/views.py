@@ -1,14 +1,14 @@
-from random import randint
+from random import randrange
 
 
 class Storm:
     def __init__(self):
-        self.chance_to_hit = randint(1, 4)
+        self.chance_to_hit = randrange(10, 100, 10)
 
     def hit_ship(self, ship_hp):
         damage_done_to_ship = ship_hp * (self.chance_to_hit / 100)
         return damage_done_to_ship
 
-    def hit_soldiers(self, soldier_hp):
-        damage_done_to_soldier = soldier_hp * (self.chance_to_hit / 100)
+    def hit_soldiers(self, soldiers):
+        damage_done_to_soldier = soldiers * (self.chance_to_hit / 100)
         return damage_done_to_soldier
