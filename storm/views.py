@@ -7,8 +7,10 @@ class Storm:
 
     def hit_ship(self, ship_hp):
         damage_done_to_ship = ship_hp * (self.chance_to_hit / 100)
-        return damage_done_to_ship
+        hp_after_storm = ship_hp - damage_done_to_ship
+        return hp_after_storm
 
     def hit_soldiers(self, soldiers):
-        damage_done_to_soldier = soldiers * (self.chance_to_hit / 100)
-        return damage_done_to_soldier
+        soldiers_killed = soldiers * (self.chance_to_hit / 100)
+        soldiers_alive = soldiers - soldiers_killed
+        return soldiers_alive
