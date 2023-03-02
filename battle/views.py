@@ -17,20 +17,3 @@ class Battle(APIView, Ship):
             return Response({"ships_list": ships_list})
         except (AttributeError, ValueError):
             return Response({'Attention': attention})
-
-    """ Create ships with stats, based on query parameters"""
-    def create_ships(self, soldiers):
-        counter = 1
-        ships_data = []
-        for i in soldiers:
-            new_ship = Ship(i)
-            name = "Ship" + str(counter)
-            counter += 1
-            print(name)
-            print(new_ship.num_of_soldiers)
-            print(new_ship.ship_hp)
-            data = dict(name=name,
-                        ship_hp=new_ship.ship_hp,
-                        number_of_soldiers=new_ship.num_of_soldiers)
-            ships_data.append(data)
-        return ships_data
