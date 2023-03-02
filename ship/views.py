@@ -12,7 +12,7 @@ class Ship:
         counter = 1
         ships_data = []
         for soldiers in number_of_soldiers:
-            name = "Ship" + str(counter)
+            name = "Ship" + " " + str(counter)
             counter += 1
             new_ship = Ship(soldiers, name)
             print(name)

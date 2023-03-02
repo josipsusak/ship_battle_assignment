@@ -1,8 +1,8 @@
+from famine.views import Famine
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from ship.views import Ship
 from storm.views import Storm
-from famine.views import Famine
 
 
 class Battle(APIView, Ship, Storm):
@@ -17,7 +17,7 @@ class Battle(APIView, Ship, Storm):
         except (AttributeError, ValueError):
             return Response({'Attention': attention})
         else:
-            list_of_soldiers = [int(parameter) for parameter in query_parameters]
+            list_of_soldiers = [abs(int(parameter)) for parameter in query_parameters]
             ships_list = self.create_ships(list_of_soldiers)
             print(ships_list)
             for ship in ships_list:
@@ -29,6 +29,15 @@ class Battle(APIView, Ship, Storm):
                 ship.update({"number_of_soldiers": storm_hits_soldiers})
                 famine_hit_soldiers = famine.hit_soldiers()
                 ship.update({"number_of_soldiers": famine_hit_soldiers})
-            return Response({"ships_list": ships_list})
+            final_result = self.calculate_result(ships_list)
+            return Response({"Winner is": final_result,
+                             "Results of a battle": ships_list}
+                            )
 
-
+    def calculate_result(self, battle_results):
+        score = {}
+        for ship in battle_results:
+            ship_score = int(ship["ship_hp"] + ship["number_of_soldiers"])
+            score[ship["name"]] = ship_score
+        result = max(score, key=score.get)
+        return result
