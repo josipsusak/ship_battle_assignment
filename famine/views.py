@@ -2,6 +2,8 @@ from random import randrange
 
 
 class Famine:
+    """Creates an instance of a famine, that strikes and damages soldiers only"""
+
     def __init__(self, soldiers):
         self.chance_to_hit = randrange(10, 100, 10)
         self.soldiers = soldiers

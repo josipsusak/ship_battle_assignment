@@ -2,6 +2,8 @@ from random import randrange
 
 
 class Storm:
+    """Creates an instance of a storm to hit both soldiers and ships, damaging both"""
+
     def __init__(self, ship_hp, soldiers):
         self.chance_to_hit = randrange(10, 100, 10)
         self.ship_hp = ship_hp

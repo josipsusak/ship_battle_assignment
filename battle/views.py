@@ -8,8 +8,8 @@ from storm.views import Storm
 class Battle(APIView, Ship):
 
     def get(self, request):
-        attention = "Please enter an URL in a suggested numerical format: http://127.0.0.1:8000/?ships=A,B,C..."
-        """ Check if URL has /?ships=...., if it doesn't, raise an exception, and return message"""
+        attention = "Please enter an URL in a suggested numerical format: http://127.0.0.1:8000/?ships=1,2,3..."
+        # Check if URL has /?ships=...., if it doesn't, raise an exception, and return message
         try:
             query_parameters = self.request.query_params.get("ships", None).split(",")
             print(query_parameters)
