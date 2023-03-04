@@ -5,7 +5,7 @@ from ship.views import Ship
 from storm.views import Storm
 
 
-class Battle(APIView, Ship):
+class Battle(APIView):
 
     def get(self, request):
         attention = "Please enter an URL in a suggested numerical format: http://127.0.0.1:8000/?ships=1,2,3..."
@@ -18,11 +18,11 @@ class Battle(APIView, Ship):
         except (AttributeError, ValueError):
             return Response({'Attention': attention})
         else:
-            ships_list = self.create_ships(list_of_soldiers)
+            ships_list = Ship().create_ships(list_of_soldiers)
             print(ships_list)
             final_result = self.storm_and_famine_hits(ships_list)
             return Response({"Winner is": final_result,
-                             "Results of a core": ships_list}
+                             "Results of a battle": ships_list}
                             )
 
     def storm_and_famine_hits(self, ships_list):
