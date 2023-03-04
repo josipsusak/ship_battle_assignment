@@ -22,7 +22,7 @@ class Battle(APIView, Ship):
             print(ships_list)
             final_result = self.storm_and_famine_hits(ships_list)
             return Response({"Winner is": final_result,
-                             "Results of a battle": ships_list}
+                             "Results of a core": ships_list}
                             )
 
     def storm_and_famine_hits(self, ships_list):
