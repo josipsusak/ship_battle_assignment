@@ -19,6 +19,3 @@ class Ship:
                         number_of_soldiers=soldiers)
             ships_data.append(data)
         return ships_data
-
-    def __str__(self):
-        return self.name
