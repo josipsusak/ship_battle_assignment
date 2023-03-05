@@ -11,9 +11,6 @@ class Ship:
         for soldiers in number_of_soldiers:
             self.name = "Ship" + " " + str(counter)
             counter += 1
-            print(self.name)
-            print(soldiers)
-            print(self.ship_hp)
             data = dict(name=self.name,
                         ship_hp=self.ship_hp,
                         number_of_soldiers=soldiers)

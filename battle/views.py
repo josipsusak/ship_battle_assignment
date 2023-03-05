@@ -12,14 +12,11 @@ class Battle(APIView):
         # Check if URL has /?ships=...., if it doesn't, raise an exception, and return message
         try:
             query_parameters = self.request.query_params.get("ships", None).split(",")
-            print(query_parameters)
-            print(type(query_parameters))
             list_of_soldiers = [abs(int(parameter)) for parameter in query_parameters]
         except (AttributeError, ValueError):
             return Response({'Attention': attention})
         else:
             ships_list = Ship().create_ships(list_of_soldiers)
-            print(ships_list)
             final_result = self.storm_and_famine_hits(ships_list)
             return Response({"Winner with the highest ship HP and number of solders is": final_result,
                              "Results of a battle": ships_list}
