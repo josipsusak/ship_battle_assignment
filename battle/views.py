@@ -27,14 +27,8 @@ class Battle(APIView):
 
     def storm_and_famine_hits(self, ships_list):
         for ship in ships_list:
-            storm = Storm(ship["ship_hp"], ship["number_of_soldiers"])
-            famine = Famine(ship["number_of_soldiers"])
-            storm_hits_ship = storm.hit_ship()
-            ship.update({"ship_hp": storm_hits_ship})
-            storm_hits_soldiers = storm.hit_soldiers()
-            ship.update({"number_of_soldiers": storm_hits_soldiers})
-            famine_hit_soldiers = famine.hit_soldiers()
-            ship.update({"number_of_soldiers": famine_hit_soldiers})
+            self.create_storm(ship)
+            self.create_famine(ship)
         result = self.calculate_result(ships_list)
         return result
 
@@ -45,3 +39,17 @@ class Battle(APIView):
             score[ship["name"]] = ship_score
         result = max(score, key=score.get)
         return result
+
+    def create_storm(self, ship):
+        storm = Storm(ship["ship_hp"], ship["number_of_soldiers"])
+        storm_hits_ship = storm.hit_ship()
+        ship.update({"ship_hp": storm_hits_ship})
+        storm_hits_soldiers = storm.hit_soldiers()
+        ship.update({"number_of_soldiers": storm_hits_soldiers})
+        return ship
+
+    def create_famine(self, ship):
+        famine = Famine(ship["number_of_soldiers"])
+        famine_hit_soldiers = famine.hit_soldiers()
+        ship.update({"number_of_soldiers": famine_hit_soldiers})
+        return ship
